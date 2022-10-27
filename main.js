@@ -1,20 +1,21 @@
 // The comments you see here are for me, documenting my learning experience.
 
-const movieContainer = document.getElementById("movie-container");
+const pokeContainer = document.getElementById("poke-container");
+let onLoadUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 
 // GET API
-async function getData() {
-  let response = await fetch("api.json");
+async function getData(url) {
+  let response = await fetch(url);
   let data = await response.json();
   return data;
 }
 
-async function renderData() {
-  let apiData = await getData();
-  apiData.map((item) => {
-    // Go through each movie
-    // Create <movie-card></movie-card> for each one
-    // Apply the data for that movie to each tag.
+async function renderData(url) {
+  let apiData = await getData(url);
+  apiData.results.map((item) => {
+    // Go through each poke
+    // Create <poke-card></poke-card> for each one
+    // Apply the data for that poke to each tag.
     // e.g; Title to H3, Poster to img, etc etc
     // Problem - can't render a component like you can in React. How do you render HTML components like React components?
 
@@ -22,18 +23,37 @@ async function renderData() {
     // Note: This initially didn't work due to logic being run in the constructor, rather than when the element was added to the DOM.
     // Used the connectedCallback() lifecycle method to correct this.
 
-    const movie = document.createElement("movie-card");
-    movie.setAttribute("name", item.Title);
-    movie.setAttribute("poster", item.Poster);
-    movie.setAttribute("year", item.Year);
+    const poke = document.createElement("poke-card");
+    poke.setAttribute("name", item.name);
+    poke.setAttribute("url", item.url);
 
-    movieContainer.appendChild(movie);
+    pokeContainer.appendChild(poke);
   });
 }
 
-renderData();
+renderData(onLoadUrl);
 
-//   Building a Card to display the movie
+// Load More functionality
+let page = 2;
+// Just because Rhys was cheeky, I'll add the ability to manually set the number of Pokémon rendered with each click!
+let limit = 10;
+async function loadMore() {
+  let moreData = await getData(
+    `https://pokeapi.co/api/v2/pokemon?offset=${
+      (page - 1) * limit
+    }&limit=${limit}`
+  );
+  moreData.results.map((item) => {
+    const poke = document.createElement("poke-card");
+    poke.setAttribute("name", item.name);
+    poke.setAttribute("url", item.url);
+
+    pokeContainer.appendChild(poke);
+  });
+  page++;
+}
+
+//   Building a Card to display the Pokémon
 
 // First, create a template to handle any content and styles.
 
@@ -42,21 +62,30 @@ renderData();
 const template = document.createElement("template");
 template.innerHTML = `
     <style>
+        .poke-card {
+            border: 1px solid red;
+            border-radius: 10px;
+            width: 50%;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
         h3 {
             color: coral;
         }
     </style>
 
-    <div class="user-card">
+    <div class="poke-card">
         <h3></h3>
-        <img src="" alt="movie poster" />
         <p></p>
     </div>
 
 `;
 
 // Now we need to start applying data.
-class MovieCard extends HTMLElement {
+class PokeCard extends HTMLElement {
   constructor() {
     super();
 
@@ -65,9 +94,9 @@ class MovieCard extends HTMLElement {
   }
   connectedCallback() {
     this.shadowRoot.querySelector("h3").innerText = this.getAttribute("name");
-    this.shadowRoot.querySelector("img").src = this.getAttribute("poster");
-    this.shadowRoot.querySelector("p").innerText = this.getAttribute("year");
+    this.shadowRoot.querySelector("p").innerText =
+      "URL: " + this.getAttribute("url");
   }
 }
 
-window.customElements.define("movie-card", MovieCard);
+window.customElements.define("poke-card", PokeCard);
