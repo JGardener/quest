@@ -11,12 +11,23 @@ async function getData() {
 
 async function renderData() {
   let apiData = await getData();
-  apiData.map((movie) => {
+  apiData.map((item) => {
     // Go through each movie
     // Create <movie-card></movie-card> for each one
     // Apply the data for that movie to each tag.
     // e.g; Title to H3, Poster to img, etc etc
     // Problem - can't render a component like you can in React. How do you render HTML components like React components?
+
+    // Solution - createElement for each loop, then set the attributes from the data.
+    // Note: This initially didn't work due to logic being run in the constructor, rather than when the element was added to the DOM.
+    // Used the connectedCallback() lifecycle method to correct this.
+
+    const movie = document.createElement("movie-card");
+    movie.setAttribute("name", item.Title);
+    movie.setAttribute("poster", item.Poster);
+    movie.setAttribute("year", item.Year);
+
+    movieContainer.appendChild(movie);
   });
 }
 
@@ -51,6 +62,8 @@ class MovieCard extends HTMLElement {
 
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+  connectedCallback() {
     this.shadowRoot.querySelector("h3").innerText = this.getAttribute("name");
     this.shadowRoot.querySelector("img").src = this.getAttribute("poster");
     this.shadowRoot.querySelector("p").innerText = this.getAttribute("year");
