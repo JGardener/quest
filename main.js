@@ -10,38 +10,20 @@ async function getData() {
     }&limit=${limit}`
   );
   let data = await response.json();
-  page++;
   return data;
 }
-
-async function renderData() {
-  let apiData = await getData();
-  apiData.results.map((item) => {
+async function updateData() {
+  let data = await getData();
+  data.results.map((item) => {
     const poke = document.createElement("poke-card");
     poke.setAttribute("name", item.name);
     poke.setAttribute("url", item.url);
-
     pokeContainer.appendChild(poke);
   });
+  return page++;
 }
 
-renderData();
-
-async function loadMore() {
-  let moreData = await getData(
-    `https://pokeapi.co/api/v2/pokemon?offset=${
-      (page - 1) * limit
-    }&limit=${limit}`
-  );
-  moreData.results.map((item) => {
-    const poke = document.createElement("poke-card");
-    poke.setAttribute("name", item.name);
-    poke.setAttribute("url", item.url);
-
-    pokeContainer.appendChild(poke);
-  });
-  page++;
-}
+updateData();
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -63,7 +45,6 @@ template.innerHTML = `
 
     <div class="poke-card">
         <h3></h3>
-        <p></p>
     </div>
 
 `;
@@ -77,8 +58,6 @@ class PokeCard extends HTMLElement {
   }
   connectedCallback() {
     this.shadowRoot.querySelector("h3").innerText = this.getAttribute("name");
-    this.shadowRoot.querySelector("p").innerText =
-      "URL: " + this.getAttribute("url");
   }
 }
 
