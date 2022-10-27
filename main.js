@@ -1,5 +1,7 @@
 // The comments you see here are for me, documenting my learning experience.
 
+const movieContainer = document.getElementById("movie-container");
+
 // GET API
 async function getData() {
   let response = await fetch("api.json");
@@ -9,8 +11,12 @@ async function getData() {
 
 async function renderData() {
   let apiData = await getData();
-  apiData.forEach((movie) => {
-    console.log(movie.Title);
+  apiData.map((movie) => {
+    // Go through each movie
+    // Create <movie-card></movie-card> for each one
+    // Apply the data for that movie to each tag.
+    // e.g; Title to H3, Poster to img, etc etc
+    // Problem - can't render a component like you can in React. How do you render HTML components like React components?
   });
 }
 
@@ -32,6 +38,8 @@ template.innerHTML = `
 
     <div class="user-card">
         <h3></h3>
+        <img src="" alt="movie poster" />
+        <p></p>
     </div>
 
 `;
@@ -44,6 +52,8 @@ class MovieCard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(template.content.cloneNode(true));
     this.shadowRoot.querySelector("h3").innerText = this.getAttribute("name");
+    this.shadowRoot.querySelector("img").src = this.getAttribute("poster");
+    this.shadowRoot.querySelector("p").innerText = this.getAttribute("year");
   }
 }
 
