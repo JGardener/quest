@@ -27,21 +27,7 @@ updateData();
 
 const template = document.createElement("template");
 template.innerHTML = `
-    <style>
-        .poke-card {
-            border: 1px solid red;
-            border-radius: 10px;
-            width: 50%;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        h3 {
-            color: coral;
-        }
-    </style>
+    <link rel="stylesheet" href="poke-card.css" />
 
     <div class="poke-card">
         <h3></h3>
