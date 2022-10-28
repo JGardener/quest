@@ -2,8 +2,6 @@ Good day,
 
 Welcome to a very simple application.
 
-I have created an API that contains some Pokémon. The purpose of this application is to display these Pokémon to the user upon initial load.
+When you load this application, you will be presented with 10 Pokémon, fetched directly from the PokéAPI, which can be found here; https://pokeapi.co/
 
-The user can then click on the "Load More" button in order to see more Pokémon.
-
-Like I said; simple.
+Underneath those initial 10 Pokémon, you will find a "Load More" button. Clicking on this will add the next 10 Pokémon to the list each time you click it.
