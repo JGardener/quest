@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#poke-container {
+  width: 70%;
+}
+
 button {
   padding: 5px;
   font-size: 1.2rem;
