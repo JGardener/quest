@@ -1,7 +1,10 @@
 const pokeContainer = document.getElementById("poke-container");
+const selectLimit = document.getElementById("selectLimit");
 
 let page = 1;
 let limit = 10;
+
+const updateLimit = () => (limit = selectLimit.value);
 
 async function getData() {
   let response = await fetch(
