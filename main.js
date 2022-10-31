@@ -1,9 +1,11 @@
 const pokeContainer = document.getElementById("poke-container");
 const selectLimit = document.getElementById("selectLimit");
+selectLimit.addEventListener("change", () => {
+  limit = selectLimit.value;
+});
 
 let page = 1;
 let limit = 10;
-const updateLimit = () => (limit = selectLimit.value);
 
 const capitaliseFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
