@@ -1,8 +1,6 @@
 const pokeContainer = document.getElementById("poke-container");
 const selectLimit = document.getElementById("selectLimit");
-selectLimit.addEventListener("change", () => {
-  limit = selectLimit.value;
-});
+selectLimit.addEventListener("change", (event) => (limit = event.target.value));
 
 let page = 1;
 let limit = 10;
