@@ -3,8 +3,10 @@ const selectLimit = document.getElementById("selectLimit");
 
 let page = 1;
 let limit = 10;
-
 const updateLimit = () => (limit = selectLimit.value);
+
+const capitaliseFirstLetter = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
 
 async function getData() {
   let response = await fetch(
@@ -17,10 +19,10 @@ async function getData() {
 }
 async function updateData() {
   let data = await getData();
-  data.results.map((item) => {
+  data.results.map((item, index) => {
     const poke = document.createElement("poke-card");
-    poke.setAttribute("name", item.name);
-    poke.setAttribute("url", item.url);
+    poke.setAttribute("number", index + ".");
+    poke.setAttribute("name", capitaliseFirstLetter(item.name));
     pokeContainer.appendChild(poke);
   });
   return page++;
@@ -33,7 +35,7 @@ template.innerHTML = `
     <link rel="stylesheet" href="poke-card.css" />
 
     <div class="poke-card">
-        <h3></h3>
+        <span></span><h3></h3>
     </div>
 
 `;
@@ -46,6 +48,8 @@ class PokeCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
   connectedCallback() {
+    this.shadowRoot.querySelector("span").innerText =
+      this.getAttribute("number");
     this.shadowRoot.querySelector("h3").innerText = this.getAttribute("name");
   }
 }
