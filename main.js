@@ -19,9 +19,8 @@ async function getData() {
 }
 async function updateData() {
   let data = await getData();
-  data.results.map((item, index) => {
+  data.results.map((item) => {
     const poke = document.createElement("poke-card");
-    poke.setAttribute("number", index + ".");
     poke.setAttribute("name", capitaliseFirstLetter(item.name));
     pokeContainer.appendChild(poke);
   });
@@ -35,7 +34,7 @@ template.innerHTML = `
     <link rel="stylesheet" href="poke-card.css" />
 
     <div class="poke-card">
-        <span></span><h3></h3>
+        <h3></h3>
     </div>
 
 `;
@@ -48,8 +47,6 @@ class PokeCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
   connectedCallback() {
-    this.shadowRoot.querySelector("span").innerText =
-      this.getAttribute("number");
     this.shadowRoot.querySelector("h3").innerText = this.getAttribute("name");
   }
 }
