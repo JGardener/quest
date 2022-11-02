@@ -2,11 +2,26 @@ const pokeContainer = document.getElementById("poke-container");
 const selectLimit = document.getElementById("selectLimit");
 selectLimit.addEventListener("change", (event) => (limit = event.target.value));
 
+const singlePokemonSearch = document.getElementById("pokemonName");
+
 let page = 1;
 let limit = 10;
 
 const capitaliseFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
+
+async function getSinglePokemon() {
+  let pokemonName = singlePokemonSearch.value;
+  let response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+  );
+  let data = await response.json();
+  const poke = document.createElement("poke-card");
+  poke.setAttribute("name", capitaliseFirstLetter(data.name));
+  pokeContainer.appendChild(poke);
+
+  return data;
+}
 
 async function getData() {
   let response = await fetch(
@@ -27,7 +42,7 @@ async function updateData() {
   return page++;
 }
 
-updateData();
+// updateData();
 
 const template = document.createElement("template");
 template.innerHTML = `
