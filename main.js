@@ -11,8 +11,11 @@ let limit = 10;
 const capitaliseFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
+// Get a single Pokémon
 async function getSinglePokemon() {
   let pokemonName = singlePokemonSearch.value.toLowerCase();
+
+  // Check for duplicates
   for (i = 0; i < pokeContainer.children.length; i++) {
     if (
       pokeContainer.children.length >= 1 &&
@@ -23,6 +26,7 @@ async function getSinglePokemon() {
       return;
     }
   }
+
   let response = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
   );
@@ -30,11 +34,10 @@ async function getSinglePokemon() {
   const poke = document.createElement("poke-card");
   poke.setAttribute("name", capitaliseFirstLetter(data.name));
   pokeContainer.appendChild(poke);
-  // console.log(pokeContainer.children);
-
   return data;
 }
 
+// Get a list of Pokémon, beginning from #1
 async function getData() {
   let response = await fetch(
     `https://pokeapi.co/api/v2/pokemon/?offset=${
