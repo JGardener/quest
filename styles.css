@@ -17,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 20px auto;
+  margin: 2rem auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 50%;
   border-radius: 10px;
@@ -33,7 +33,11 @@ body {
 #error {
   color: red;
   font-size: 1.2rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+p {
+  margin: 0.5rem 0;
 }
 
 select {
@@ -52,5 +56,5 @@ button {
   line-height: 1.25;
   margin: 20px auto;
   min-height: 3rem;
-  padding: 20px;
+  padding: 10px 20px;
 }
