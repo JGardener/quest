@@ -11,7 +11,7 @@ const capitaliseFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 async function getSinglePokemon() {
-  let pokemonName = singlePokemonSearch.value;
+  let pokemonName = singlePokemonSearch.value.toLowerCase();
   let response = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
   );
