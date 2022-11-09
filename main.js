@@ -1,5 +1,6 @@
 const pokeContainer = document.getElementById("poke-container");
 const selectLimit = document.getElementById("selectLimit");
+const errorText = document.getElementById("error");
 selectLimit.addEventListener("change", (event) => (limit = event.target.value));
 
 const singlePokemonSearch = document.getElementById("pokemonName");
@@ -12,6 +13,16 @@ const capitaliseFirstLetter = (string) =>
 
 async function getSinglePokemon() {
   let pokemonName = singlePokemonSearch.value.toLowerCase();
+  for (i = 0; i < pokeContainer.children.length; i++) {
+    if (
+      pokeContainer.children.length >= 1 &&
+      pokeContainer.children.namedItem(capitaliseFirstLetter(pokemonName)) !=
+        null
+    ) {
+      errorText.innerText = "That Pokémon is already in the list.";
+      return;
+    }
+  }
   let response = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
   );
@@ -19,6 +30,7 @@ async function getSinglePokemon() {
   const poke = document.createElement("poke-card");
   poke.setAttribute("name", capitaliseFirstLetter(data.name));
   pokeContainer.appendChild(poke);
+  // console.log(pokeContainer.children);
 
   return data;
 }
