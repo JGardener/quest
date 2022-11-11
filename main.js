@@ -88,7 +88,8 @@ async function getSinglePokemon() {
       pokeShadow.style.background = "#8B3E21";
       break;
     case "Steel":
-      pokeShadow.style.background = "#42BD94";
+      pokeShadow.style.background = "#D1D1E0";
+      poke.style.color = "black";
       break;
     case "Water":
       pokeShadow.style.background = "#86A8FC";
