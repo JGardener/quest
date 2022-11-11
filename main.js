@@ -34,6 +34,8 @@ async function getSinglePokemon() {
   const poke = document.createElement("poke-card");
   poke.setAttribute("name", capitaliseFirstLetter(data.name));
   poke.setAttribute("type", data.types[0].type.name);
+  poke.setAttribute("src", data.sprites.front_default);
+  // console.log(data);
   pokeContainer.appendChild(poke);
   return data;
 }
@@ -54,6 +56,7 @@ async function updateData() {
     const poke = document.createElement("poke-card");
     poke.setAttribute("name", capitaliseFirstLetter(item.name));
     poke.setAttribute("type", item.types[0].type.name);
+    poke.setAttribute("src", data.sprites.front_default);
     pokeContainer.appendChild(poke);
   });
   return page++;
@@ -67,6 +70,7 @@ template.innerHTML = `
 
     <div class="poke-card">
         <h3 id="name"></h3>
+        <img id="sprite" alt="Pokémon sprite" />
         <p id="type"></p>
     </div>
 
@@ -85,6 +89,7 @@ class PokeCard extends HTMLElement {
     this.shadowRoot.getElementById("type").innerText = capitaliseFirstLetter(
       this.getAttribute("type")
     );
+    this.shadowRoot.getElementById("sprite").src = this.getAttribute("src");
   }
 }
 
