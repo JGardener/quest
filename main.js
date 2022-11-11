@@ -32,10 +32,67 @@ async function getSinglePokemon() {
   );
   let data = await response.json();
   const poke = document.createElement("poke-card");
+  const pokeShadow = poke.shadowRoot.querySelector("div");
   poke.setAttribute("name", capitaliseFirstLetter(data.name));
   poke.setAttribute("type", data.types[0].type.name);
   poke.setAttribute("src", data.sprites.front_default);
   pokeContainer.appendChild(poke);
+  switch (pokeShadow.querySelector("p").innerText) {
+    case "Bug":
+      pokeShadow.style.background = "#3B9950";
+      break;
+    case "Dark":
+      pokeShadow.style.background = "#5A5A77";
+      break;
+    case "Dragon":
+      pokeShadow.style.background = "#448B95";
+      break;
+    case "Electric":
+      pokeShadow.style.background = "#E3E429";
+      break;
+    case "Fairy":
+      pokeShadow.style.background = "#981844";
+      break;
+    case "Fighting":
+      pokeShadow.style.background = "#994025";
+      break;
+    case "Fire":
+      pokeShadow.style.background = "#AB1F23";
+      break;
+    case "Flying":
+      pokeShadow.style.background = "#4A677D";
+      break;
+    case "Ghost":
+      pokeShadow.style.background = "#8E688E";
+      break;
+    case "Grass":
+      pokeShadow.style.background = "#27CB4F";
+      break;
+    case "Ground":
+      pokeShadow.style.background = "#A9702C";
+      break;
+    case "Ice":
+      pokeShadow.style.background = "#84D2F7";
+      break;
+    case "Normal":
+      pokeShadow.style.background = "#CA98A7";
+      break;
+    case "Poison":
+      pokeShadow.style.background = "#9B69D9";
+      break;
+    case "Psychic":
+      pokeShadow.style.background = "#F81D8F";
+      break;
+    case "Rock":
+      pokeShadow.style.background = "#8B3E21";
+      break;
+    case "Steel":
+      pokeShadow.style.background = "#42BD94";
+      break;
+    case "Water":
+      pokeShadow.style.background = "#86A8FC";
+      break;
+  }
   return data;
 }
 
@@ -58,8 +115,6 @@ async function updateData() {
   });
   return page++;
 }
-
-// updateData();
 
 const template = document.createElement("template");
 template.innerHTML = `
