@@ -49,6 +49,7 @@ async function getSinglePokemon() {
       break;
     case "Electric":
       pokeShadow.style.background = "#E3E429";
+      poke.style.color = "black";
       break;
     case "Fairy":
       pokeShadow.style.background = "#981844";
@@ -93,6 +94,7 @@ async function getSinglePokemon() {
       break;
     case "Water":
       pokeShadow.style.background = "#86A8FC";
+      poke.style.color = "black";
       break;
   }
   return data;
