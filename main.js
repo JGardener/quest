@@ -73,6 +73,7 @@ async function getSinglePokemon() {
       break;
     case "Ice":
       pokeShadow.style.background = "#84D2F7";
+      poke.style.color = "black";
       break;
     case "Normal":
       pokeShadow.style.background = "#CA98A7";
