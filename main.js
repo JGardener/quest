@@ -30,6 +30,12 @@ async function getSinglePokemon() {
   let response = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
   );
+  if (!response.ok) {
+    errorText.innerText =
+      "No Pokémon found, please check your spelling and try again.";
+  } else {
+    errorText.innerText = "";
+  }
   let data = await response.json();
   const poke = document.createElement("poke-card");
   const pokeShadow = poke.shadowRoot.querySelector("div");
