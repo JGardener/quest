@@ -35,7 +35,6 @@ async function getSinglePokemon() {
   poke.setAttribute("name", capitaliseFirstLetter(data.name));
   poke.setAttribute("type", data.types[0].type.name);
   poke.setAttribute("src", data.sprites.front_default);
-  // console.log(data);
   pokeContainer.appendChild(poke);
   return data;
 }
@@ -55,8 +54,6 @@ async function updateData() {
   data.results.map((item) => {
     const poke = document.createElement("poke-card");
     poke.setAttribute("name", capitaliseFirstLetter(item.name));
-    poke.setAttribute("type", item.types[0].type.name);
-    poke.setAttribute("src", data.sprites.front_default);
     pokeContainer.appendChild(poke);
   });
   return page++;
