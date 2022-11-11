@@ -33,6 +33,7 @@ async function getSinglePokemon() {
   let data = await response.json();
   const poke = document.createElement("poke-card");
   poke.setAttribute("name", capitaliseFirstLetter(data.name));
+  poke.setAttribute("type", data.types[0].type.name);
   pokeContainer.appendChild(poke);
   return data;
 }
@@ -52,6 +53,7 @@ async function updateData() {
   data.results.map((item) => {
     const poke = document.createElement("poke-card");
     poke.setAttribute("name", capitaliseFirstLetter(item.name));
+    poke.setAttribute("type", item.types[0].type.name);
     pokeContainer.appendChild(poke);
   });
   return page++;
@@ -64,7 +66,8 @@ template.innerHTML = `
     <link rel="stylesheet" href="poke-card.css" />
 
     <div class="poke-card">
-        <h3></h3>
+        <h3 id="name"></h3>
+        <p id="type"></p>
     </div>
 
 `;
@@ -77,7 +80,11 @@ class PokeCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
   connectedCallback() {
-    this.shadowRoot.querySelector("h3").innerText = this.getAttribute("name");
+    this.shadowRoot.getElementById("name").innerText =
+      this.getAttribute("name");
+    this.shadowRoot.getElementById("type").innerText = capitaliseFirstLetter(
+      this.getAttribute("type")
+    );
   }
 }
 
