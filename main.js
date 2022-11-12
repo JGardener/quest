@@ -8,6 +8,72 @@ const singlePokemonSearch = document.getElementById("pokemonName");
 let page = 1;
 let limit = 10;
 
+let defaultFontColor = "#FFF";
+
+// Colour Pokémon cards based on Pokémon types
+// Bright Pokémon cards have black text for accessibility
+const backgroundColorFromType = {
+  "Bug": {
+    backgroundColor: "#3B9950",
+  },
+  "Dark": {
+    backgroundColor: "#5A5A77",
+  },
+  "Dragon": {
+    backgroundColor: "#448B95",
+  },
+  "Electric": {
+    backgroundColor: "#E3E429",
+    fontColor: "#000",
+  },
+  "Fairy": {
+    backgroundColor: "#981844",
+  },
+  "Fighting": {
+    backgroundColor: "#994025",
+  },
+  "Fire": {
+    backgroundColor: "#AB1F23",
+  },
+  "Flying": {
+    backgroundColor: "#4A677D",
+  },
+  "Ghost": {
+    backgroundColor: "#8E688E",
+  },
+  "Grass": {
+    backgroundColor: "#27CB4F",
+  },
+  "Ground": {
+    backgroundColor: "#A9702C",
+  },
+  "Ice": {
+    backgroundColor: "#84D2F7",
+    fontColor: "#000",
+  },
+  "Normal": {
+    backgroundColor: "#CA98A7",
+  },
+  "Poison": {
+    backgroundColor: "#9B69D9",
+  },
+  "Psychic": {
+    backgroundColor: "#F81D8F",
+  },
+  "Rock": {
+    backgroundColor: "#8B3E21",
+  },
+  "Steel": {
+    backgroundColor: "#D1D1E0",
+    fontColor: "#000",
+  },
+  "Water": {
+    backgroundColor: "#86A8FC",
+    fontColor: "#000",
+  },
+};
+
+// The API returns lower-case words, this helps.
 const capitaliseFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -43,66 +109,14 @@ async function getSinglePokemon() {
   poke.setAttribute("type", data.types[0].type.name);
   poke.setAttribute("src", data.sprites.front_default);
   pokeContainer.appendChild(poke);
-  switch (pokeShadow.querySelector("p").innerText) {
-    case "Bug":
-      pokeShadow.style.background = "#3B9950";
-      break;
-    case "Dark":
-      pokeShadow.style.background = "#5A5A77";
-      break;
-    case "Dragon":
-      pokeShadow.style.background = "#448B95";
-      break;
-    case "Electric":
-      pokeShadow.style.background = "#E3E429";
-      poke.style.color = "black";
-      break;
-    case "Fairy":
-      pokeShadow.style.background = "#981844";
-      break;
-    case "Fighting":
-      pokeShadow.style.background = "#994025";
-      break;
-    case "Fire":
-      pokeShadow.style.background = "#AB1F23";
-      break;
-    case "Flying":
-      pokeShadow.style.background = "#4A677D";
-      break;
-    case "Ghost":
-      pokeShadow.style.background = "#8E688E";
-      break;
-    case "Grass":
-      pokeShadow.style.background = "#27CB4F";
-      break;
-    case "Ground":
-      pokeShadow.style.background = "#A9702C";
-      break;
-    case "Ice":
-      pokeShadow.style.background = "#84D2F7";
-      poke.style.color = "black";
-      break;
-    case "Normal":
-      pokeShadow.style.background = "#CA98A7";
-      break;
-    case "Poison":
-      pokeShadow.style.background = "#9B69D9";
-      break;
-    case "Psychic":
-      pokeShadow.style.background = "#F81D8F";
-      break;
-    case "Rock":
-      pokeShadow.style.background = "#8B3E21";
-      break;
-    case "Steel":
-      pokeShadow.style.background = "#D1D1E0";
-      poke.style.color = "black";
-      break;
-    case "Water":
-      pokeShadow.style.background = "#86A8FC";
-      poke.style.color = "black";
-      break;
-  }
+
+  pokeShadow.style.background =
+    backgroundColorFromType[
+      pokeShadow.querySelector("p").innerText
+    ].backgroundColor;
+  pokeShadow.style.color =
+    backgroundColorFromType[pokeShadow.querySelector("p").innerText]
+      .fontColor || defaultFontColor;
   return data;
 }
 
