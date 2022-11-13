@@ -121,24 +121,24 @@ async function getSinglePokemon() {
 }
 
 // Get a list of Pokémon, beginning from #1
-async function getData() {
-  let response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/?offset=${
-      (page - 1) * limit
-    }&limit=${limit}`
-  );
-  let data = await response.json();
-  return data;
-}
-async function updateData() {
-  let data = await getData();
-  data.results.map((item) => {
-    const poke = document.createElement("poke-card");
-    poke.setAttribute("name", capitaliseFirstLetter(item.name));
-    pokeContainer.appendChild(poke);
-  });
-  return page++;
-}
+// async function getData() {
+//   let response = await fetch(
+//     `https://pokeapi.co/api/v2/pokemon/?offset=${
+//       (page - 1) * limit
+//     }&limit=${limit}`
+//   );
+//   let data = await response.json();
+//   return data;
+// }
+// async function updateData() {
+//   let data = await getData();
+//   data.results.map((item) => {
+//     const poke = document.createElement("poke-card");
+//     poke.setAttribute("name", capitaliseFirstLetter(item.name));
+//     pokeContainer.appendChild(poke);
+//   });
+//   return page++;
+// }
 
 const template = document.createElement("template");
 template.innerHTML = `
