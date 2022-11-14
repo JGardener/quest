@@ -105,6 +105,7 @@ async function getSinglePokemon() {
   if (!response.ok) {
     errorText.innerText =
       "No Pokémon found, please check your spelling and try again.";
+    errorText.style.color = "red";
   } else {
     errorText.innerText = "";
   }
@@ -128,6 +129,7 @@ async function getSinglePokemon() {
       .fontColor || defaultFontColor;
 
   singlePokemonSearch.value = "";
+  pokeContainer.scrollTo(0, pokeContainer.scrollHeight);
 
   return data;
 }

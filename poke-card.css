@@ -14,4 +14,16 @@
   flex-direction: column;
   padding: 8px;
   width: 70%;
+  animation: append-animate 0.5s linear;
+}
+
+@keyframes append-animate {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
