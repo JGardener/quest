@@ -84,11 +84,11 @@ async function getSinglePokemon() {
   // Check for duplicates
   for (i = 0; i < pokeContainer.children.length; i++) {
     if (
-      pokeContainer.children.length >= 1 &&
       pokeContainer.children.namedItem(capitaliseFirstLetter(pokemonName)) !=
-        null
+      null
     ) {
-      errorText.innerText = "That Pokémon is already in the list.";
+      errorText.innerText = "That Pokémon is already in the list!";
+      errorText.style.color = "red";
       return;
     }
   }
@@ -109,6 +109,9 @@ async function getSinglePokemon() {
   poke.setAttribute("type", data.types[0].type.name);
   poke.setAttribute("src", data.sprites.front_default);
   pokeContainer.appendChild(poke);
+
+  errorText.innerText = "Pokémon added!";
+  errorText.style.color = "green";
 
   pokeShadow.style.background =
     backgroundColorFromType[
