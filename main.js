@@ -2,8 +2,9 @@
 // selectLimit.addEventListener("change", (event) => (limit = event.target.value));
 const pokeContainer = document.getElementById("poke-container");
 const errorText = document.getElementById("error");
-
 const singlePokemonSearch = document.getElementById("pokemonName");
+const searchSingleButton = document.getElementById("searchSingle");
+searchSingleButton.addEventListener("click", getSinglePokemon);
 
 let page = 1;
 let limit = 10;
@@ -120,6 +121,9 @@ async function getSinglePokemon() {
   pokeShadow.style.color =
     backgroundColorFromType[pokeShadow.querySelector("p").innerText]
       .fontColor || defaultFontColor;
+
+  singlePokemonSearch.value = "";
+
   return data;
 }
 
