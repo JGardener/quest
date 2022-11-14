@@ -105,7 +105,8 @@ async function getSinglePokemon() {
   if (!response.ok) {
     errorText.innerText =
       "No Pokémon found, please check your spelling and try again.";
-    errorText.style.color = "red";
+    errorText.style.color = "#FD1B17";
+    errorText.style.fontWeight = "bold";
   } else {
     errorText.innerText = "";
   }
@@ -118,7 +119,7 @@ async function getSinglePokemon() {
   pokeContainer.appendChild(poke);
 
   errorText.innerText = "Pokémon added!";
-  errorText.style.color = "green";
+  errorText.style.color = "#27CB4F";
 
   pokeShadow.style.background =
     backgroundColorFromType[

@@ -58,9 +58,10 @@ body {
 }
 
 #error {
-  color: red;
   font-size: 1.2rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  font-weight: normal;
+  padding: 3px;
 }
 
 p {
