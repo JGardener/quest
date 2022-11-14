@@ -5,6 +5,11 @@ const errorText = document.getElementById("error");
 const singlePokemonSearch = document.getElementById("pokemonName");
 const searchSingleButton = document.getElementById("searchSingle");
 searchSingleButton.addEventListener("click", getSinglePokemon);
+singlePokemonSearch.addEventListener("keydown", (e) => {
+  if (e.code === "Enter") {
+    getSinglePokemon();
+  }
+});
 
 let page = 1;
 let limit = 10;
