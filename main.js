@@ -1,7 +1,7 @@
+// const selectLimit = document.getElementById("selectLimit");
+// selectLimit.addEventListener("change", (event) => (limit = event.target.value));
 const pokeContainer = document.getElementById("poke-container");
-const selectLimit = document.getElementById("selectLimit");
 const errorText = document.getElementById("error");
-selectLimit.addEventListener("change", (event) => (limit = event.target.value));
 
 const singlePokemonSearch = document.getElementById("pokemonName");
 
