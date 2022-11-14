@@ -116,6 +116,10 @@ async function getSinglePokemon() {
   poke.setAttribute("name", capitaliseFirstLetter(data.name));
   poke.setAttribute("type", data.types[0].type.name);
   poke.setAttribute("src", data.sprites.front_default);
+  poke.setAttribute("stat-1", data.stats[0].base_stat);
+  poke.setAttribute("stat-2", data.stats[1].base_stat);
+  poke.setAttribute("stat-3", data.stats[2].base_stat);
+  poke.setAttribute("stat-4", data.stats[3].base_stat);
   pokeContainer.appendChild(poke);
 
   errorText.innerText = "Pokémon added!";
@@ -123,15 +127,14 @@ async function getSinglePokemon() {
 
   pokeShadow.style.background =
     backgroundColorFromType[
-      pokeShadow.querySelector("p").innerText
+      pokeShadow.querySelector("span").innerText
     ].backgroundColor;
   pokeShadow.style.color =
-    backgroundColorFromType[pokeShadow.querySelector("p").innerText]
+    backgroundColorFromType[pokeShadow.querySelector("span").innerText]
       .fontColor || defaultFontColor;
 
   singlePokemonSearch.value = "";
   pokeContainer.scrollTo(0, pokeContainer.scrollHeight);
-
   return data;
 }
 
@@ -162,7 +165,13 @@ template.innerHTML = `
     <div class="poke-card">
         <h3 id="name"></h3>
         <img id="sprite" alt="Pokémon sprite" />
-        <p id="type"></p>
+        <p>Type: <span id="type"></span></p>
+        <div class="stats">
+          <p>HP: <span id="stat-1"></span></p>
+          <p>Attack: <span id="stat-2"></span></p>
+          <p>Defense: <span id="stat-3"></span></p>
+          <p>Special Attack: <span id="stat-4"></span></p>
+        </div>
     </div>
 
 `;
@@ -181,6 +190,14 @@ class PokeCard extends HTMLElement {
       this.getAttribute("type")
     );
     this.shadowRoot.getElementById("sprite").src = this.getAttribute("src");
+    this.shadowRoot.getElementById("stat-1").innerText =
+      this.getAttribute("stat-1");
+    this.shadowRoot.getElementById("stat-2").innerText =
+      this.getAttribute("stat-2");
+    this.shadowRoot.getElementById("stat-3").innerText =
+      this.getAttribute("stat-3");
+    this.shadowRoot.getElementById("stat-4").innerText =
+      this.getAttribute("stat-4");
   }
 }
 

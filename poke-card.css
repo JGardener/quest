@@ -17,6 +17,19 @@
   animation: append-animate 0.5s linear;
 }
 
+#type {
+  margin-bottom: 5px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+}
+
+.stats p {
+  margin-right: 5px;
+}
+
 @keyframes append-animate {
   from {
     transform: scale(0);
