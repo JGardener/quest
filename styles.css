@@ -37,7 +37,7 @@ body {
 #poke-container {
   width: 90%;
   max-height: 75vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #poke-container::-webkit-scrollbar {
