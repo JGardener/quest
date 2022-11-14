@@ -10,6 +10,7 @@ Each Pokémon card contains:
 - The name of the Pokémon; e.g. Pikachu, Charmander, etc.
 - The default sprite of the Pokémon, as seen in Pokémon battles.
 - The type of Pokémon; e.g. Fire, Water, etc.
+- The base stats of the Pokémon.
 - The background color of each Pokémon card corresponds to the Pokémon's type.
 
 Build your favourite Pokémon team!
