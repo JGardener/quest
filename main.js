@@ -83,7 +83,6 @@ const backgroundColorFromType = {
 const capitaliseFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
-// Get a single Pokémon
 async function getSinglePokemon() {
   let pokemonName = singlePokemonSearch.value.toLowerCase();
 
@@ -137,43 +136,66 @@ async function getSinglePokemon() {
   pokeContainer.scrollTo(0, pokeContainer.scrollHeight);
   return data;
 }
-
-// Get a list of Pokémon, beginning from #1
-// async function getData() {
-//   let response = await fetch(
-//     `https://pokeapi.co/api/v2/pokemon/?offset=${
-//       (page - 1) * limit
-//     }&limit=${limit}`
-//   );
-//   let data = await response.json();
-//   return data;
-// }
-// async function updateData() {
-//   let data = await getData();
-//   data.results.map((item) => {
-//     const poke = document.createElement("poke-card");
-//     poke.setAttribute("name", capitaliseFirstLetter(item.name));
-//     pokeContainer.appendChild(poke);
-//   });
-//   return page++;
-// }
+// <link rel="stylesheet" href="poke-card.css" />
 
 const template = document.createElement("template");
 template.innerHTML = `
-    <link rel="stylesheet" href="poke-card.css" />
+  <style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
 
-    <div class="poke-card">
-        <h3 id="name"></h3>
-        <img id="sprite" alt="Pokémon sprite" />
-        <p>Type: <span id="type"></span></p>
-        <div class="stats">
-          <p>HP: <span id="stat-1"></span></p>
-          <p>Attack: <span id="stat-2"></span></p>
-          <p>Defense: <span id="stat-3"></span></p>
-          <p>Special Attack: <span id="stat-4"></span></p>
-        </div>
+  .poke-card {
+    border-radius: 10px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    flex-direction: column;
+    padding: 8px;
+    max-width: 400px;
+    animation: append-animate 0.5s linear;
+  }
+
+  #type {
+    margin-bottom: 5px;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: center;
+  }
+
+  .stats p {
+    margin-right: 5px;
+  }
+
+  @keyframes append-animate {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  </style>
+
+  <div class="poke-card">
+    <h3 id="name"></h3>
+    <img id="sprite" alt="Pokémon sprite" />
+    <p>Type: <span id="type"></span></p>
+    <div class="stats">
+      <p>HP: <span id="stat-1"></span></p>
+      <p>Attack: <span id="stat-2"></span></p>
+      <p>Defense: <span id="stat-3"></span></p>
+      <p>Special Attack: <span id="stat-4"></span></p>
     </div>
-
+  </div>
 `;
 
 class PokeCard extends HTMLElement {
